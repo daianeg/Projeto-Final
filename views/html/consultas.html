@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP MEDICAL GROUP</title>
+    <link href="consultas.css" rel="stylesheet" >
+    <style>
+        @font-face {
+        font-family: "Lexend Deca";
+        src: url("LexendDeca-VariableFont_wght.ttf"); 
+        }
+      </style>
+</head>
+<body>
+    <button id="voltar" onclick="history.back()">Voltar</button>
+    <div id="divgrandona">
+        <h1 id="txtconsul">Consultas do dia: <span id="data-atual"></span></h1>
+    </div>
+    <div class="table-wrapper">
+        <table id="consultaTable">
+            <tr>
+              <th></th>
+              <th>Horário</th>
+              <th>Médico</th>
+              <th>Paciente</th>
+              <th><button id="cancel" onclick="openPopup()">Cancelar</button></th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>12:00</td>
+                <td>Acir Machado</td>
+                <td>Daiane Garcia</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>13:00</td>
+                <td>Lilian Ferraz</td>
+                <td>Raul Correa</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>14:00</td>
+                <td>Roberta Espindola</td>
+                <td>João vitor</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>15:00</td>
+                <td>Acir Machado</td>
+                <td>Carlos Henrique</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>16:00</td>
+                <td>Roberta Espindola </td>
+                <td>Gabriel Alves</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>17:00</td>
+                <td>Lilian Ferraz</td>
+                <td>Gabriela Abacherli</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div id="popup" class="popup">
+        <h2>TEM CERTEZA QUE DESEJA CANCELAR SUA CONSULTA?</h2>
+        <button onclick="closePopup(); removerItens()" id="removeButton">Confirmar</button>
+    </div>
+
+    <script>
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function removerItens() {
+        var checkboxes = document.getElementsByClassName('itemCheckbox');
+        var consultaTable = document.getElementById('consultaTable');
+
+        for (var i = checkboxes.length - 1; i >= 0; i--) {
+            var checkbox = checkboxes[i];
+
+            if (checkbox.checked) {
+                var row = checkbox.parentNode.parentNode;
+                consultaTable.deleteRow(row.rowIndex);
+            }
+        }
+    }
+
+    function exibirDataAtual() {
+        var dataAtual = new Date();
+        var dataFormatada = dataAtual.toLocaleDateString('pt-BR');
+        document.getElementById('data-atual').textContent = dataFormatada;
+    }
+
+    exibirDataAtual();
+    var urlParams = new URLSearchParams(window.location.search);
+
+    var nameText = urlParams.get("nameText");
+    var emailText = urlParams.get("emailText");
+    var phoneText = urlParams.get("phoneText");
+    
+    var medicalselect = urlParams.get("medicalselect");
+
+    var consultaTable = document.getElementById("consultaTable");
+
+    var nameText = urlParams.get("nameText");
+    var emailText = urlParams.get("emailText");
+    var phoneText = urlParams.get("phoneText");
+    var medicalselect = urlParams.get("medicalselect");
+
+    var consultaTable = document.getElementById("consultaTable");
+
+    for (var i = 0; i < 1; i++) { 
+        var newRow = consultaTable.insertRow();
+
+        var checkboxCell = newRow.insertCell();
+        var nameCell = newRow.insertCell();
+        var emailCell = newRow.insertCell();
+        var phoneCell = newRow.insertCell();
+        var medCell = newRow.insertCell();
+    }
+    for (var i = 0; i < 1; i++) { 
+        var newRow = consultaTable.insertRow();
+
+        var checkboxCell = newRow.insertCell(1);
+        var nameCell = newRow.insertCell(1);
+        var emailCell = newRow.insertCell(1);
+        var phoneCell = newRow.insertCell(1);
+        var medCell = newRow.insertCell(1);
+    
+
+        checkboxCell.innerHTML = '<input type="checkbox" class="itemCheckbox" value="1">';
+        nameCell.textContent = nameText;
+        emailCell.textContent = emailText;
+        phoneCell.textContent = phoneText;
+        medCell.textContent = medicalselect;
+    }
+    </script>
+</body>
+</html>

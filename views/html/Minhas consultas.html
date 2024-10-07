@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="design consultas.css" rel="stylesheet">
+    <title>SP MEDICAL GROUP</title>
+    <button id="voltar"onclick="history.back()">Voltar</button>
+    <style>
+        @font-face {
+        font-family: "Lexend Deca";
+        src: url("LexendDeca-VariableFont_wght.ttf"); 
+        }
+      </style>
+</head>
+<body>
+    <div id="divgrandona">   
+    </div>
+    <div id="consulta">
+        <h1 id="txtconsulta">Próxima consulta</h1>
+        <div id="medico">
+            <p id="txtmedico">Médico:</p> 
+        </div>
+        <div id="hora">
+            <p id="txthora">Horário:</p>
+        </div>
+        <div id="dia">
+            <p id="txtdia">Dia:</p>
+        </div>
+        <button id="cancel">Cancelar</button>
+        <p id="txt1">Em caso de falta ou atraso de 15 minutos, será cobrado uma multa de 10% do valor da consulta(mais os 15% que foi pago no ato do agendamento)</p>
+    </div> <br>
+    <button id="btnagenda" onclick="redirecionar()">Agende a sua próxima consulta aqui</button>
+    <div >
+        <img src="imagens/consulta.jpg" alt="Consulta" id="img">
+    </div>
+        
+    </div>
+</body>
+<script>
+    function redirecionar() {
+    window.location.href ="marcarconsultap.html";
+}
+</script>
+</html>

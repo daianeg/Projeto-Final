@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP MEDICAL GROUP</title>
+    <link href="agenda.css" rel="stylesheet">
+    <style>
+        @font-face {
+        font-family: "Lexend Deca";
+        src: url("LexendDeca-VariableFont_wght.ttf"); 
+        }
+      </style>
+</head>
+<body>
+    <div id="divgrandona">
+        <img src="imagens/SP Medical Group.png" alt="logo" id="img">
+    </div>
+    <div id="marcar">
+        <form>
+            <input type="button"  id="voltar" value="Voltar" onclick="history.back()">
+        </form>
+        <h1 id="txtagenda">Agendar consulta</h1>
+        <input type="date" placeholder="Data: " id="data">
+        <input type="time" placeholder="Horário: " id="hora">
+        <input type="text" placeholder="Paciente: " id="paciente">
+        <select id="medico" name="medico">
+            <option value="" disabled selected hidden>Médicos</option>
+            <option value="Acir">Dr. Acir Machado</option>
+            <option value="Lilian">Dra. Lilian Ferraz</option>
+            <option value="Roberta">Dra. Roberta Espindola</option>
+        </select>
+        <button id="btnagenda" onclick="openPopup()">Agendar</button>
+    </div>
+
+    <div id="popup" class="popup-container">
+    <div class="popup-content">
+    <span class="popup-close" onclick="closePopup()">&times;</span>
+    <h2>Consulta agendada com sucesso!</h2>
+    <img src="imagens/certinho.png" alt="é nois" id="certinho">
+    </div>
+    </div>
+    <script>
+        function openPopup() {
+  document.getElementById("popup").classList.add("active");
+}
+
+function closePopup() {
+  document.getElementById("popup").classList.remove("active");
+}
+    </script>
+
+    
+</body>
+</html>

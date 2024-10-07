@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP MEDICAL GROUP</title>
+    <link href="marcarconsultap.css" rel="stylesheet">
+    <style>
+        @font-face {
+        font-family: "Lexend Deca";
+        src: url("LexendDeca-VariableFont_wght.ttf"); 
+        }
+      </style>
+</head>
+<body>
+    <span id="div1">
+        <button id="voltar" onclick="history.back()">Voltar</button>
+        <h1 id="txt1">Solicite a sua próxima consulta</h1>
+        <input type="date" placeholder="Data: " id="data">
+        <input type="number" placeholder="Horário: " id="hora">
+        <select id="pagamento">
+            <option value="" disabled selected>Forma de pagamento</option>
+            <option>Débito</option>
+            <option>Crédito</option>
+            <option>Pix</option>
+            <option>Boleto Bancário</option>
+        </select>
+        <select id="medico">
+            <option value="" disabled selected>Médico</option>
+            <option>Acir Machado</option>
+            <option>Lilian Ferraz</option>
+            <option>Roberta Espindola</option>
+        </select>
+        <br>
+        <button id="agd">Agendar</button>
+    </span>
+    <div id="logo">
+        <img src="imagens/SP Medical Group.png" alt="logo" id="img"> 
+    </div>
+
+</body>
+
+</html>

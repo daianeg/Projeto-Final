@@ -1,0 +1,117 @@
+body{
+    background-color: #f5f5f5;
+    font-family: Lexend Deca;
+}
+#voltar{
+    width: 100px;
+    height: 45px;
+    margin-top: 15px;
+    margin-left: 30px;
+    background-color: #001233;
+    color: #f5f5f5;
+    font-size: 20px;
+    transition: transform .2s;
+    font-family: Lexend Deca;
+}
+#voltar:hover{
+    transform: scale(1.03);
+}
+#divgrandona{
+    margin-top: 20px;
+    margin-left: -10px;
+    width: 1538px;
+    height: 60px;
+    background-color: #001233;
+}
+#txtconsul{
+    font-size: 40px;
+    padding-top: 5px;
+    color: #f5f5f5;
+    text-align: center;
+    font-family: Lexend Deca;
+}
+table {
+    margin-top: 5px;
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Lexend Deca;
+    
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 24px 66px;
+    font-size: 20px;
+    font-family: Lexend Deca;
+    font-weight: 100;
+    
+  }
+  
+  tr:nth-child(even) {
+    background-color:lightgray;
+    font-family: Lexend Deca;
+  }
+  
+  th {
+    background-color:#001233;
+    color: white;
+    font-family: Lexend Deca;
+  }
+.table-wrapper {
+    height: 580px;
+    overflow: auto;
+}
+input[type="checkbox"] {
+    margin-left: 95px;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    width: 30px; 
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Lexend Deca;
+}
+input[type="checkbox"]:checked {
+    background-color: #001233;
+}
+#cancel{
+    background-color:lightgray;
+    color: black;
+    font-size: 20px;
+    width: 214px;
+    height: 50px;
+    transition: 0.3s;
+    font-family: Lexend Deca;
+}
+#cancel:hover{
+    transform: scale(1.03);
+}
+.popup {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f5f5f5;
+    padding: 20px;
+    border: 1px solid black;
+    width: 1018px;
+    height: 552px;
+    text-align: center;
+    font-family: Lexend Deca;
+  }
+#removeButton{
+    color:white;
+    background-color: #023E7D;
+    font-size: 20px;
+    width: 170px;
+    height: 50px;
+    transition: 0.5s;
+    font-family: Lexend Deca;
+}
+#removeButton:hover{
+    transform: scale(1.03);
+
+}

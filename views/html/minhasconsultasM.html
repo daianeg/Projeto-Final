@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP MEDICAL GROUP</title>
+    <link href="consultas.css" rel="stylesheet" >
+    <style>
+        @font-face {
+        font-family: "Lexend Deca";
+        src: url("LexendDeca-VariableFont_wght.ttf"); 
+        }
+      </style>
+</head>
+<body>
+    <button id="voltar" onclick="history.back()">Voltar</button>
+    <div id="divgrandona">
+        <h1 id="txtconsul">Consultas do dia: <span id="data-atual"></span></h1>
+    </div>
+    <div class="table-wrapper">
+        <table id="consultaTable">
+            <tr>
+              <th>Paciente</th>
+              <th>Horário</th>
+            </tr>
+            <tr>
+                <td>Daiane Garcia</td>
+                <td>12:00</td>
+            </tr>
+            <tr>
+                <td>Carlos Henrique </td>
+                <td>13:30</td>
+            </tr>
+            <tr>
+                <td>Gabriel Alves </td>
+                <td>14:00</td>
+            </tr>
+            <tr>
+                <td>João Vitor  </td>
+                <td>16:00</td>
+            </tr>
+            <tr>
+                <td>Raul Correa </td>
+                <td>17:00</td>
+            </tr>
+            <tr>
+                <td>Gabriela Abacherli</td>
+                <td>18:00</td>
+            </tr>
+        </table>
+    </div>
+    
+</body>
+<script>
+    function exibirDataAtual() {
+        var dataAtual = new Date();
+        var dataFormatada = dataAtual.toLocaleDateString('pt-BR');
+        document.getElementById('data-atual').textContent = dataFormatada;
+    }
+
+    exibirDataAtual();
+<script/>
