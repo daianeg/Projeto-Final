@@ -27,5 +27,17 @@ class UsuarioModel {
         $stmt->bind_param("ss", $email, $hashed_password);
         return $stmt->execute();
     }
+
+    public function cadastrarUsuario($nome, $email, $cpf, $data_nascimento, $endereco, $telefone, $hashed_password) {
+        $query = "INSERT INTO pacientes (nome, email, cpf, data_nascimento, endereco, telefone, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("sssssss", $nome, $email, $cpf, $data_nascimento, $endereco, $telefone, $hashed_password);
+        return $stmt->execute();
+    }
+
+   
 }
+
+
+
 ?>

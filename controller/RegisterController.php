@@ -11,28 +11,36 @@ class RegisterController {
 
     public function register() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $nome = $_POST['nome'];
             $email = $_POST['email'];
+            $cpf = $_POST['cpf'];
+            $data_nascimento = $_POST['data_nascimento'];
+            $endereco = $_POST['endereco'];
+            $telefone = $_POST['telefone'];
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
 
+            // Verifica se as senhas coincidem
             if ($password !== $confirm_password) {
                 echo "As senhas não coincidem!";
                 return;
             }
 
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $result = $this->model->verificarUsuario($email);
-
-            if ($result->num_rows == 0) {
-                if ($this->model->registrarUsuario($email, $hashed_password)) {
-                    echo "Cadastro realizado com sucesso!";
-                    header("Location: /views/html/homepaciente.html");
-                    exit();
-                } else {
-                    echo "Erro ao realizar o cadastro!";
-                }
-            } else {
+            // Verifica se o e-mail já está registrado
+            if ($this->model->verificarUsuario($email)->num_rows > 0) {
                 echo "E-mail já registrado!";
+                return;
+            }
+
+            // Hash da senha
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            // Insere o novo usuário no banco de dados
+            if ($this->model->cadastrarUsuario($nome, $email, $cpf, $data_nascimento, $endereco, $telefone, $hashed_password)) {
+                header("Location: ../views/login_view.php");
+                exit();
+            } else {
+                echo "Erro ao cadastrar o usuário!";
             }
         }
     }

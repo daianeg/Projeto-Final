@@ -17,8 +17,28 @@
         <form action="../controller/RegisterController.php" method="POST" class="form form-signup">
           <fieldset>
             <div class="input-block">
+              <label for="signup-nome">Nome</label>
+              <input id="signup-nome" name="nome" type="text" required>
+            </div>
+            <div class="input-block">
               <label for="signup-email">E-mail</label>
               <input id="signup-email" name="email" type="email" required>
+            </div>
+            <div class="input-block">
+              <label for="signup-cpf">CPF</label>
+              <input id="signup-cpf" name="cpf" type="text" required>
+            </div>
+            <div class="input-block">
+              <label for="signup-nascimento">Data de Nascimento</label>
+              <input id="signup-nascimento" name="data_nascimento" type="date" required>
+            </div>
+            <div class="input-block">
+              <label for="signup-endereco">Endereço</label>
+              <input id="signup-endereco" name="endereco" type="text" required>
+            </div>
+            <div class="input-block">
+              <label for="signup-telefone">Telefone</label>
+              <input id="signup-telefone" name="telefone" type="text" required>
             </div>
             <div class="input-block">
               <label for="signup-password">Senha</label>

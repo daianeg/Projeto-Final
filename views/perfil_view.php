@@ -14,7 +14,7 @@ include('../model/conexão.php');
 $user_id = $_SESSION['user_id'];
 
 // Consulte o banco de dados para obter as informações do usuário
-$query = "SELECT email FROM pacientes WHERE id = ?";
+$query = "SELECT  nome, email, cpf, data_nascimento, endereco, telefone FROM pacientes WHERE id = ?";
 $stmt = $conn->prepare($query);
 
 if ($stmt === false) {
@@ -47,7 +47,15 @@ $user = $result->fetch_assoc();
       <div class="card mx-auto" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Informações de Perfil</h5>
-          <p class="card-text"><strong>E-mail:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+          <p class="card-text"><strong>Nome:</strong> <?php echo isset($user['nome']) ? htmlspecialchars($user['nome']) : 'N/A'; ?></p>
+          <p class="card-text"><strong>E-mail:</strong> <?php echo isset($user['email']) ? htmlspecialchars($user['email']) : 'N/A'; ?></p>
+          <p class="card-text"><strong>CPF:</strong> <?php echo isset($user['cpf']) ? htmlspecialchars($user['cpf']) : 'N/A'; ?></p>
+          <p class="card-text"><strong>Data de Nascimento:</strong> <?php echo isset($user['data_nascimento']) ? htmlspecialchars($user['data_nascimento']) : 'N/A'; ?></p>
+          <p class="card-text"><strong>Endereço:</strong> <?php echo isset($user['endereco']) ? htmlspecialchars($user['endereco']) : 'N/A'; ?></p>
+          <p class="card-text"><strong>Telefone:</strong> <?php echo isset($user['telefone']) ? htmlspecialchars($user['telefone']) : 'N/A'; ?></p>
+
+
+          
           <!-- Se houver mais campos no cadastro, eles podem ser adicionados aqui -->
           <a href="logout.php" class="btn btn-danger">Sair</a>
         </div>

@@ -21,7 +21,7 @@ class LoginController {
                 if (password_verify($password, $user['senha'])) {
                     session_start();
                     $_SESSION['user_id'] = $user['id'];
-                    header("Location: /views/html/homepaciente.html");
+                    header("Location: /views/paciente/html/homepaciente.html");
                     exit();
                 } else {
                     echo "Senha incorreta!";
