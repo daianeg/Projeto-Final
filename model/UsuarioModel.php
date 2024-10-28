@@ -1,58 +1,55 @@
 <?php
-class UsuarioModel {
+
+require_once '../config/conexao.php';
+
+class users {
     private $conn;
+    private $table_name = 'pacientes';
 
-    public function __construct($conn) {
-        $this->conn = $conn;
+    public $nome;
+    public $email;
+    public $cpf;
+    public $data_nascimento;
+    public $endereco;  // Use `endereco` sem acento
+    public $telefone;
+    public $senha;
+
+    public function __construct() {
+        $database = new Database();
+        $this->conn = $database->getConnection();
     }
 
-    public function verificarUsuario($email) {
-        $query = "SELECT * FROM pacientes WHERE email = ? LIMIT 1";
+    public function save() {
+        // Atualizando a consulta para garantir que os parâmetros estejam corretos
+        $query = "INSERT INTO " . $this->table_name . " 
+                  (nome, email, cpf, data_nascimento, endereco, telefone, senha) 
+                  VALUES (:nome, :email, :cpf, :data_nascimento, :endereco, :telefone, :senha)";
+
         $stmt = $this->conn->prepare($query);
-    
-        // Verifique se o prepare() foi bem-sucedido
-        if ($stmt === false) {
-            die('Erro na preparação da consulta SQL: ' . $this->conn->error);
+
+        // Vinculando parâmetros corretamente
+        $stmt->bindParam(':nome', $this->nome, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $this->email, PDO::PARAM_STR);
+        $stmt->bindParam(':cpf', $this->cpf, PDO::PARAM_STR);
+        $stmt->bindParam(':data_nascimento', $this->data_nascimento, PDO::PARAM_STR);
+        $stmt->bindParam(':endereco', $this->endereco, PDO::PARAM_STR);  // `endereco` sem acento
+        $stmt->bindParam(':telefone', $this->telefone, PDO::PARAM_STR);
+        $stmt->bindParam(':senha', $this->senha, PDO::PARAM_STR);
+
+        // Executa a consulta
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            // Exibir o erro para depuração
+            echo "Erro ao salvar: " . $e->getMessage();
+            return false;
         }
-    
-        $stmt->bind_param("s", $email);
+    }
+
+    public function getAll() {
+        $query = "SELECT * FROM " . $this->table_name;
+        $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt->get_result();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-
-    public function registrarUsuario($email, $hashed_password) {
-        $query = "INSERT INTO pacientes (email, senha) VALUES (?, ?)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ss", $email, $hashed_password);
-        return $stmt->execute();
-    }
-
-    public function cadastrarUsuario($nome, $email, $cpf, $data_nascimento, $endereco, $telefone, $hashed_password) {
-        $query = "INSERT INTO pacientes (nome, email, cpf, data_nascimento, endereco, telefone, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("sssssss", $nome, $email, $cpf, $data_nascimento, $endereco, $telefone, $hashed_password);
-        return $stmt->execute();
-    }
-
-    public function getUserData($user_id) {
-        $query = "SELECT nome, email, cpf, data_nascimento, endereco, telefone FROM pacientes WHERE id = ?";
-        $stmt = $this->conn->prepare($query);
-
-        if ($stmt === false) {
-            die('Erro na preparação da consulta SQL: ' . $this->conn->error);
-        }
-
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
-    }
-    
-
-   
 }
-
-
-
-?>
