@@ -21,7 +21,7 @@ class LoginController {
                 if (password_verify($password, $user['senha'])) {
                     session_start();
                     $_SESSION['user_id'] = $user['id'];
-                    header("Location: /views/paciente/html/homepaciente.html");
+                    header("Location: /paciente/perfil");  // Redirecionamento pela rota
                     exit();
                 } else {
                     echo "Senha incorreta!";
@@ -32,7 +32,4 @@ class LoginController {
         }
     }
 }
-
-$loginController = new LoginController($conn);
-$loginController->login();
 ?>

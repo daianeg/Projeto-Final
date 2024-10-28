@@ -35,6 +35,21 @@ class UsuarioModel {
         return $stmt->execute();
     }
 
+    public function getUserData($user_id) {
+        $query = "SELECT nome, email, cpf, data_nascimento, endereco, telefone FROM pacientes WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if ($stmt === false) {
+            die('Erro na preparação da consulta SQL: ' . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+    
+
    
 }
 
