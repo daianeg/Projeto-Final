@@ -2,7 +2,7 @@
 
 require_once '../config/conexao.php';
 
-class users {
+class Users {
     private $conn;
     private $table_name = 'pacientes';
 
@@ -10,7 +10,7 @@ class users {
     public $email;
     public $cpf;
     public $data_nascimento;
-    public $endereco;  // Use `endereco` sem acento
+    public $endereco;
     public $telefone;
     public $senha;
 
@@ -20,27 +20,20 @@ class users {
     }
 
     public function save() {
-        // Atualizando a consulta para garantir que os parâmetros estejam corretos
-        $query = "INSERT INTO " . $this->table_name . " 
-                  (nome, email, cpf, data_nascimento, endereco, telefone, senha) 
+        $query = "INSERT INTO " . $this->table_name . " (nome, email, cpf, data_nascimento, endereco, telefone, senha) 
                   VALUES (:nome, :email, :cpf, :data_nascimento, :endereco, :telefone, :senha)";
-
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':cpf', $this->cpf);
+        $stmt->bindParam(':data_nascimento', $this->data_nascimento);
+        $stmt->bindParam(':endereco', $this->endereco);
+        $stmt->bindParam(':telefone', $this->telefone);
+        $stmt->bindParam(':senha', $this->senha);
 
-        // Vinculando parâmetros corretamente
-        $stmt->bindParam(':nome', $this->nome, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $this->email, PDO::PARAM_STR);
-        $stmt->bindParam(':cpf', $this->cpf, PDO::PARAM_STR);
-        $stmt->bindParam(':data_nascimento', $this->data_nascimento, PDO::PARAM_STR);
-        $stmt->bindParam(':endereco', $this->endereco, PDO::PARAM_STR);  // `endereco` sem acento
-        $stmt->bindParam(':telefone', $this->telefone, PDO::PARAM_STR);
-        $stmt->bindParam(':senha', $this->senha, PDO::PARAM_STR);
-
-        // Executa a consulta
         try {
             return $stmt->execute();
         } catch (PDOException $e) {
-            // Exibir o erro para depuração
             echo "Erro ao salvar: " . $e->getMessage();
             return false;
         }
@@ -52,4 +45,40 @@ class users {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getUserById($id) {
+        $query = "SELECT nome, email, cpf, data_nascimento, endereco, telefone FROM " . $this->table_name . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function update() {
+        $query = "INSERT INTO " . $this->table_name . " (nome, email, cpf, data_nascimento, endereco, telefone, senha) 
+        VALUES (:nome, :email, :cpf, :data_nascimento, :endereco, :telefone, :senha)";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':cpf', $this->cpf);
+        $stmt->bindParam(':data_nascimento', $this->data_nascimento);
+        $stmt->bindParam(':endereco', $this->endereco);
+        $stmt->bindParam(':telefone', $this->telefone);
+        
+
+        return $stmt->execute();
+    }
+
+    public function deleteByName() {
+        $query = "DELETE FROM " . $this->table_name . " WHERE nome = :nome";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nome', $this->nome);
+
+        return $stmt->execute();
+    }
+    
+
+  
+    
 }

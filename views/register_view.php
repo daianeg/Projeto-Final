@@ -31,6 +31,9 @@
         <input type="password"  id="senha" name="senha" required><br><br>
 
         <input type="submit" value="Cadastrar">
+
+        <a href="/Projeto-Final/public/login">Já tem cadastro? Faça Login aqui!</a>
+
     </form>
 </body>
 </html>
