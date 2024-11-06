@@ -15,7 +15,7 @@
         <label for="email">E-mail:</label>
         <input type="text" id="email" name="email" required><br><br>
 
-        <label for="cpf">CPF:</label>
+        <label for="cpf">CPF/CRM:</label>
         <input type="number" id="cpf" name="cpf" required><br><br>
 
         <label for="data_nascimento">Data de nascimento</label>
