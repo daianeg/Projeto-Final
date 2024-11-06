@@ -4,7 +4,7 @@ require_once '../config/conexao.php';
 
 class Users {
     private $conn;
-    private $table_name = 'pacientes';
+    private $table_name = 'usuarios';
 
     public $nome;
     public $email;

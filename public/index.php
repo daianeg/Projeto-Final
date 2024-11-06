@@ -24,7 +24,7 @@ switch ($request) {
     case '/Projeto-Final/public/Home':
         $controller->HomePage();
         break;
-    case '/Projeto-Final/public/Home-med':
+    case '/Projeto-Final/public/medico':
         $controller->HomePage_med();
         break;
     case '/Projeto-Final/public/login':
@@ -52,9 +52,9 @@ switch ($request) {
     case '/Projeto-Final/public/update-user':
         $controller->updateUser();
         break;
-
-    
-
+    case '/Projeto-Final/public/secretaria':
+        $controller->HomePage_sec();
+        break;
     default:
         http_response_code(404);
         echo "Página não encontrada.";

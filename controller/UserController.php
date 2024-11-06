@@ -10,7 +10,7 @@ class UserController {
     }
 
     public function saveUser() {
-        // Recebe dados do formulário
+       
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $cpf = $_POST['cpf'];
@@ -19,7 +19,7 @@ class UserController {
         $telefone = $_POST['telefone'];
         $senha = $_POST['senha'];
 
-        // Cria um novo livro
+        
         $user = new Users();
         $user->nome = $nome;
         $user->email = $email;
@@ -29,9 +29,9 @@ class UserController {
         $user->telefone = $telefone;
         $user->senha = $senha;
 
-        // Salva no banco de dados
+       
         if ($user->save()) {
-            // Redireciona para a página de listagem
+           
             header('Location: /Projeto-Final/public/Home');
         } else {
             echo "Erro ao cadastrar!";
@@ -39,7 +39,6 @@ class UserController {
     }
 
     public function HomePage() {
-        // Pega todos os livros do banco de dados
         $user = new Users();
         $user = $user->getAll();
         // Exibe a lista de livros
@@ -47,26 +46,32 @@ class UserController {
     }
 
     public function HomePage_med() {
-        // Pega todos os livros do banco de dados
+       
         $user = new Users();
         $user = $user->getAll();
         // Exibe a lista de livros
         require_once '../views/medicos/html/Homepage-M.html';
     }
 
+    public function HomePage_sec() {
+        $user = new Users();
+        $user = $user->getAll();
+        require_once '../views/secretaria/html/HomepageSecretaria.html';
+    }
+
     public function showProfile($id) {
-        // Busca os dados do usuário pelo ID
+        
         $user = new Users();
         $user = $user->getUserById($id);
     
-        // Exibe a view do perfil
+       
         require_once '../views/Perfil_view.php';
     }
 
     public function showUpdateForm($id) {
         $user = new Users();
         $user = $user->getUserById($id);
-        include '../views/update_book_form.php'; // Inclua o arquivo do formulário de atualização
+        include '../views/update_book_form.php'; 
     
     }
 
