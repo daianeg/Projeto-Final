@@ -1,0 +1,59 @@
+/* cadastrar-usuario.css */
+body {
+    background-color: #0b1c36;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #07122a;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #12264a;
+    border-radius: 8px;
+}
+
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1e3254;
+    color: #ffffff;
+}
+
+input::placeholder {
+    color: #aac5e2;
+}
+
+.btn {
+    padding: 12px;
+    background-color: #3b7dd8;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2a5ca7;
+}
