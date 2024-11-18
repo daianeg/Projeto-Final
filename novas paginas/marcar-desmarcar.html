@@ -1,0 +1,34 @@
+<!-- marcar-desmarcar.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcar Consulta - SP Medical Group</title>
+    <link rel="stylesheet" href="marcar-desmarcar.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Marcar Nova Consulta</h1>
+    </header>
+
+    <main class="container">
+        <form class="consulta-form">
+            <label for="data">Data:</label>
+            <input type="date" id="data" required>
+
+            <label for="hora">Horário:</label>
+            <input type="time" id="hora" required>
+
+            <label for="medico">Médico:</label>
+            <select id="medico" required>
+                <option value="">Selecione um Médico</option>
+                <option value="dr-joao">Dr. João Silva</option>
+                <option value="dra-ana">Dra. Ana Paula</option>
+            </select>
+
+            <button type="submit" class="btn">Marcar Consulta</button>
+        </form>
+    </main>
+</body>
+</html>
