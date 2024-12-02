@@ -6,12 +6,11 @@ class Users {
     private $conn;
     private $table_name = 'usuarios';
 
+    public $id;
     public $nome;
     public $email;
     public $cpf;
-    public $data_nascimento;
     public $endereco;
-    public $telefone;
     public $senha;
 
     public function __construct() {
@@ -20,15 +19,13 @@ class Users {
     }
 
     public function save() {
-        $query = "INSERT INTO " . $this->table_name . " (nome, email, cpf, data_nascimento, endereco, telefone, senha) 
-                  VALUES (:nome, :email, :cpf, :data_nascimento, :endereco, :telefone, :senha)";
+        $query = "INSERT INTO " . $this->table_name . " (nome, email, cpf, endereco,senha) 
+                  VALUES (:nome, :email, :cpf, :endereco, :senha)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nome', $this->nome);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':cpf', $this->cpf);
-        $stmt->bindParam(':data_nascimento', $this->data_nascimento);
         $stmt->bindParam(':endereco', $this->endereco);
-        $stmt->bindParam(':telefone', $this->telefone);
         $stmt->bindParam(':senha', $this->senha);
 
         try {
@@ -43,41 +40,51 @@ class Users {
         $query = "SELECT * FROM " . $this->table_name;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retorna um array de registros
     }
+    
 
     public function getUserById($id) {
-        $query = "SELECT nome, email, cpf, data_nascimento, endereco, telefone FROM " . $this->table_name . " WHERE id = :id";
+        $query = "SELECT nome, email, cpf, endereco FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update() {
-        $query = "INSERT INTO " . $this->table_name . " (nome, email, cpf, data_nascimento, endereco, telefone, senha) 
-        VALUES (:nome, :email, :cpf, :data_nascimento, :endereco, :telefone, :senha)";
+    public function deleteById($id) {
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(':nome', $this->nome);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':cpf', $this->cpf);
-        $stmt->bindParam(':data_nascimento', $this->data_nascimento);
-        $stmt->bindParam(':endereco', $this->endereco);
-        $stmt->bindParam(':telefone', $this->telefone);
-        
-
-        return $stmt->execute();
-    }
-
-    public function deleteByName() {
-        $query = "DELETE FROM " . $this->table_name . " WHERE nome = :nome";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':nome', $this->nome);
-
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
         return $stmt->execute();
     }
     
+    public function update() {
+        try {
+            $query = "UPDATE " . $this->table_name . " 
+                      SET nome = :nome, email = :email, cpf = :cpf, endereco = :endereco, senha = :senha
+                      WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+    
+            $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $stmt->bindParam(':nome', $this->nome, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $this->email, PDO::PARAM_STR);
+            $stmt->bindParam(':senha', $this->senha, PDO::PARAM_STR);
+            $stmt->bindParam(':cpf', $this->cpf, PDO::PARAM_STR);
+            $stmt->bindParam(':endereco', $this->endereco, PDO::PARAM_STR);
+            
+    
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            die("Erro no banco de dados: " . $e->getMessage());
+        }
+    }
+    
+    
+    
+
+  
 
   
     

@@ -2,6 +2,8 @@
 
 require_once '../model/UsuarioModel.php';
 
+
+
 class UserController {
 
     public function showForm() {
@@ -9,24 +11,23 @@ class UserController {
         require_once '../views/Register_view.php';
     }
 
+  
+
     public function saveUser() {
-       
+        $id = $_POST['id'];
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $cpf = $_POST['cpf'];
-        $data_nascimento = $_POST['data_nascimento'];
         $endereco = $_POST['endereco'];
-        $telefone = $_POST['telefone'];
         $senha = $_POST['senha'];
 
         
         $user = new Users();
+        $user->id = $id;
         $user->nome = $nome;
         $user->email = $email;
         $user->cpf = $cpf;
-        $user->data_nascimento = $data_nascimento;
         $user->endereco = $endereco;
-        $user->telefone = $telefone;
         $user->senha = $senha;
 
        
@@ -42,23 +43,16 @@ class UserController {
         $user = new Users();
         $user = $user->getAll();
         // Exibe a lista de livros
-        require_once '../views/paciente/html/homepaciente.html';
+        require_once '../views/homepage.php';
     }
 
-    public function HomePage_med() {
-       
+    /*public function Users(){
         $user = new Users();
         $user = $user->getAll();
-        // Exibe a lista de livros
-        require_once '../views/medicos/html/Homepage-M.html';
-    }
+        require_once '../views/usuarios.php';
+    }*/
 
-    public function HomePage_sec() {
-        $user = new Users();
-        $user = $user->getAll();
-        require_once '../views/secretaria/html/HomepageSecretaria.html';
-    }
-
+   
     public function showProfile($id) {
         
         $user = new Users();
@@ -71,40 +65,81 @@ class UserController {
     public function showUpdateForm($id) {
         $user = new Users();
         $user = $user->getUserById($id);
-        include '../views/update_book_form.php'; 
+
+        require_once '../views/editar.php'; 
     
     }
 
+    public function deleteUser($id) {
+        $userModel = new Users();
+        if ($userModel->deleteById($id)) {
+            header('Location: /Projeto-Final/public/Users');
+        } else {
+            echo "Erro ao excluir o usuário.";
+        }
+    }
+
+    public function listUsers() {
+      
+        $userModel = new Users(); 
+        $users = $userModel->getAll(); 
+        include '../views/usuarios.php';
+    }
+    
+    /*
+    public function editUser() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userModel = new Users();
+            $id = $_POST['id'];
+            $userModel->nome = $_POST['nome'];
+            $userModel->email = $_POST['email'];
+            $userModel->cpf = $_POST['cpf'];
+            $userModel->endereco = $_POST['endereco'];
+    
+            if ($userModel->update($id)) {
+                header('Location: ../Projeto-Final/public/editar');
+            } else {
+                echo "Erro ao atualizar o usuário.";
+            }
+        }
+    }*/
+
+    public function showEditForm($id) {
+        $user = new Users();
+        $user = $user->getUserById($id);
+        
+        // Certifique-se de passar o usuário encontrado para a view
+        require_once '../views/editar.php'; 
+    }
+    
     public function updateUser() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = new Users();
-            $nome = $_POST['nome'];
-            $email = $_POST['email'];
-            $cpf = $_POST['cpf'];
-            $data_nascimento = $_POST['data_nascimento'];
-            $endereco = $_POST['endereco'];
-            $telefone = $_POST['telefone'];
-
-            if ($user->update()) {
-                header('Location: /Projeto-Final/public/profile');
-            } else {
-                echo "Erro ao atualizar o perfil.";
-            }
-        }
-    }
-
-    public function deleteUserByName() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $user = new Users();
+            
+            // Atribua os dados do formulário
+            $user->id = $_POST['id'];
             $user->nome = $_POST['nome'];
-
-            if ($user->deleteByName()) {
-                header('Location: /Projeto-Final/public/profile');
+            $user->email = $_POST['email'];
+            $user->senha = $_POST['senha'];
+            $user->endereco = $_POST['endereco'];
+            $user->cpf = $_POST['cpf'];
+    
+            // Verifique se as senhas correspondem
+            if ($_POST['senha'] === $_POST['confirmar_senha']) {
+                if ($user->update()) {
+                    header('Location: /Projeto-Final/public/Users');
+                } else {
+                    echo "Erro ao atualizar as informações!";
+                }
             } else {
-                echo "Erro ao excluir o livro.";
+                echo "As senhas não coincidem!";
             }
         }
     }
+    
+    
+
+
 
     
 
