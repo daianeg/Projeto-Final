@@ -1,0 +1,21 @@
+CREATE DATABASE sp_medical_group
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+USE sp_medical_group;
+	CREATE TABLE usuarios (
+		id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		nome VARCHAR(30),
+		email VARCHAR(255) NOT NULL UNIQUE,
+		senha VARCHAR(255) NOT NULL,
+		tipo ENUM('paciente', 'medico', 'secretaria'),
+		cpf VARCHAR(20),
+		/*data_nascimento DATE,*/
+		endereco VARCHAR(60)
+		/*telefone VARCHAR(20),
+		especialidade VARCHAR(30),
+		crm INT(20)*/
+	) DEFAULT CHARSET = utf8;
+
+select * from usuarios;
+
+drop table usuarios;
